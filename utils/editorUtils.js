@@ -10,6 +10,7 @@ const exec = Promise.promisify(require('child_process').exec);
 let ncpAsync = Promise.promisify(require('ncp').ncp);
 const fs = require('fs');
 const fsPromises = fs.promises;
+let rimraf = require("rimraf");
 
 let EditorUtils = {};
 
@@ -188,13 +189,9 @@ EditorUtils.deleteEditor = (path) => {
     return new Promise(function (resolve, reject) {
         fs.exists(path, function (exists) {
             if (exists) {
-                fs.unlink(path, (error) => {
-                    if (error) {
-                        reject(error)
-                    } else {
-                        resolve();
-                    }
-                })
+                rimraf(path, function () { 
+                    resolve();
+                });
             } else {
                 resolve();
             }
