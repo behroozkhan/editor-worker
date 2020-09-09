@@ -131,7 +131,7 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
     try {
         // TODO make it async in safe way
         if (!fs.existsSync(path)) {
-            fs.mkdirSync(path);
+            fs.mkdirSync(path, {recursive: true});
         }
 
         let command = `git clone ${gitAddress}`;
