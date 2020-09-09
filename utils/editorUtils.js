@@ -262,6 +262,8 @@ EditorUtils.installDependencies = async (dependencies, path) => {
             throw new Error(stdout);
         }
 
+        console.log("installDependencies stdout", stdout)
+
         return {
             success,
             error
