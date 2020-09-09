@@ -192,9 +192,11 @@ EditorUtils.deleteEditor = (path) => {
                     if (error) {
                         reject(error)
                     } else {
-                        resolve(exists);
+                        resolve();
                     }
                 })
+            } else {
+                resolve();
             }
         })
     })
