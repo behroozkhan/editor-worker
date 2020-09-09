@@ -14,7 +14,7 @@ app.post(appBaseRoute + '/request', async (req, res) => {
     
     let path = `${process.env.PROJECT_BASE_PATH}/${publisherId}/${websiteId}`;
     res.json(
-        new Response(true, {}).json()
+        new Response(true, {}, "Preparing Editor ...").json()
     );
 
     console.log("Preparing Editor ...");
