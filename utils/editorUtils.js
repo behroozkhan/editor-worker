@@ -15,18 +15,18 @@ let EditorUtils = {};
 
 EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, addedProducts,
     longProcessData, editorVersion = 1) => {
-    let editorGitData = EditorUtils.getSourceFilePath(publisherWebsite, editorVersion);
-    let dependencies = publisherWebsite.metadata.dependencies || [];
-    let services = publisherWebsite.metadata.services || [];
-
-    let siteDataJsonPath = `${path}/src/data/siteData.json`;
-    let servicePortsJsonPath = `${path}/src/data/servicePorts.json`;
-    let configJsonPath = `${path}/src/data/config.json`;
-    let packagePath = `${path}/package.json`;
-
-    let homepage = `/${publisherWebsite.publisherId}/${publisherWebsite.endWebsiteId}/build`;
-
     try {
+        let editorGitData = EditorUtils.getSourceFilePath(publisherWebsite, editorVersion);
+        let dependencies = publisherWebsite.metadata.dependencies || [];
+        let services = publisherWebsite.metadata.services || [];
+
+        let siteDataJsonPath = `${path}/src/data/siteData.json`;
+        let servicePortsJsonPath = `${path}/src/data/servicePorts.json`;
+        let configJsonPath = `${path}/src/data/config.json`;
+        let packagePath = `${path}/package.json`;
+
+        let homepage = `/${publisherWebsite.publisherId}/${publisherWebsite.endWebsiteId}/build`;
+
         console.log("Copying editor files ...");
         updateLongProcess(longProcessData, 'Copying editor files ...', "runnung", {
             progress: 10
@@ -184,10 +184,21 @@ EditorUtils.copyFiles = async (sourceFilePath, path, productDetails, addedProduc
     }
 }
 
-EditorUtils.deleteEditor = async (path) => {
-    if (await fsPromises.exists(path)) {
-        await fsPromises.remove(path);
-    }
+EditorUtils.deleteEditor = (path) => {
+    return new Promise(function (resolve, reject) {
+        fs.exists(path, function (exists) {
+            if (exists) {
+                fs.unlink(path, (error) => {
+                    if (error) {
+                        reject(error)
+                    } else {
+                        resolve(exists);
+                    }
+                })
+            }
+        })
+    })
+    
 }
 
 EditorUtils.getSourceFilePath = (publisherWebsite, editorVersion) => {
