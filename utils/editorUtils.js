@@ -145,8 +145,10 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
             cwd: path
         });
 
-        if (!success)
+        if (!success) {
+            console.log(error);
             throw new Error("Failed on git clone ...");
+        }
 
         await ncpAsync(`${path}/${projectName}`, path);
 
