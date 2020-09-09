@@ -259,7 +259,7 @@ EditorUtils.installDependencies = async (dependencies, path) => {
         });
 
         if (!success) {
-            throw new Error(error);
+            throw new Error(stderr);
         }
 
         return {
