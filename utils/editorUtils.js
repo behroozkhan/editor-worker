@@ -2,7 +2,7 @@ let {
     getRandomInt,
     updateLongProcess,
     execShellCommand,
-    waitFOrMilis
+    waitForMilis
 } = require('./utils');
 
 const Promise = require('bluebird');
@@ -40,7 +40,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         if (!prepareResult.success)
             throw new Error(`Can't prepare editor: ${prepareResult.message}`);
 
-        await waitFOrMilis(500);
+        await waitForMilis(500);
 
         console.log("Installing required packages ...");
         updateLongProcess(longProcessData, 'Installing required packages ...', "running", {
