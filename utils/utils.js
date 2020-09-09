@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 module.exports.getRandomInt = function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
