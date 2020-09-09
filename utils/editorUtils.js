@@ -14,7 +14,8 @@ const fsPromises = fs.promises;
 let EditorUtils = {};
 
 EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, addedProducts,
-    longProcessData, editorVersion = 1) => {
+    longProcessData, editorVersion = 1) => 
+{
     try {
         let editorGitData = EditorUtils.getSourceFilePath(publisherWebsite, editorVersion);
         let dependencies = publisherWebsite.metadata.dependencies || [];
