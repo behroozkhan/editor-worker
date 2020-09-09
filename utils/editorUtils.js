@@ -204,10 +204,9 @@ EditorUtils.deleteEditor = (path) => {
 
 EditorUtils.removeFolder = (path) => {
     return new Promise(function (resolve, reject) {
-            rimraf(path, function () { 
-                resolve();
-            });
-        })
+        rimraf(path, function () { 
+            resolve();
+        });
     })
     
 }
