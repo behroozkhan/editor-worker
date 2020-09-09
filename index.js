@@ -1,5 +1,5 @@
-import EditorUtils from './utils/editorUtils';
-import Response from './utils/response';
+let EditorUtils = require('./utils/editorUtils');
+let Response = require('./utils/response');
 
 require('dotenv').config();
 

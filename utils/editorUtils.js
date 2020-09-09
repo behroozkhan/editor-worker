@@ -1,8 +1,8 @@
-import {
+let {
     getRandomInt,
     updateLongProcess,
     execShellCommand
-} from './utils';
+} = require('./utils');
 
 const Promise = require('bluebird');
 const execFile = Promise.promisify(require('child_process').execFile);
@@ -333,4 +333,4 @@ EditorUtils.heartbeat = async (path) => {
     }
 }
 
-export default EditorUtils;
+module.exports = EditorUtils;

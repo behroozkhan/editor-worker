@@ -1,10 +1,10 @@
-export function getRandomInt(min, max) {
+module.exports.getRandomInt = function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function updateLongProcess({longProcessUrl, longProcessToken, longProcessId}, status, state, metaData) {
+module.exports.updateLongProcess = function updateLongProcess({longProcessUrl, longProcessToken, longProcessId}, status, state, metaData) {
     axios({
         method: 'post',
         url: longProcessUrl,
@@ -23,7 +23,7 @@ export function updateLongProcess({longProcessUrl, longProcessToken, longProcess
     });
 };
 
-export function existsAsync(path) {
+module.exports.existsAsync = function existsAsync(path) {
     return new Promise(function (resolve, reject) {
         fs.exists(path, function (exists) {
             resolve(exists);
@@ -31,7 +31,7 @@ export function existsAsync(path) {
     })
 }
 
-export function waitForMilis(milis) {
+module.exports.waitForMilis = function waitForMilis(milis) {
     return new Promise(function (resolve, reject) {
         setTimeout(() => {
             resolve();
@@ -39,7 +39,7 @@ export function waitForMilis(milis) {
     })
 }
 
-export function execShellCommand(cmd, config) {
+module.exports.execShellCommand = function execShellCommand(cmd, config) {
     return new Promise((resolve, reject) => {
         exec(cmd, config, (error, stdout, stderr) => {
             let success = !(error);
@@ -53,7 +53,7 @@ export function execShellCommand(cmd, config) {
     });
 }
 
-export function spawnAsync(cmd, args, options, unref) {
+module.exports.spawnAsync = function spawnAsync(cmd, args, options, unref) {
     return new Promise((resolve, reject) => {
         const ls = spawn(cmd, args, options);
 
