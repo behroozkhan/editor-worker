@@ -47,7 +47,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             progress: 30
         });
 
-        let packageResult = await EditorUtils.installDependencies([]);
+        let packageResult = await EditorUtils.installDependencies([], path);
         if (!packageResult.success)
             throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
 
@@ -56,7 +56,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             progress: 50
         });
 
-        let dependenciesResult = await EditorUtils.installDependencies(dependencies);
+        let dependenciesResult = await EditorUtils.installDependencies(dependencies, path);
         if (!dependenciesResult.success)
             throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
 
@@ -246,7 +246,7 @@ EditorUtils.getPermissonsFromWebsites = (websites) => {
     return [];
 }
 
-EditorUtils.installDependencies = async (dependencies) => {
+EditorUtils.installDependencies = async (dependencies, path) => {
     try {
         let command = 'pnpm install ' + dependencies.join(' ');
         let {
@@ -255,7 +255,7 @@ EditorUtils.installDependencies = async (dependencies) => {
             stderr,
             error
         } = await execShellCommand(command, {
-            cwd: moduleDir
+            cwd: path
         });
 
         return {
