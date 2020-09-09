@@ -152,7 +152,7 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
 
         await ncpAsync(`${path}/${projectName}`, path);
 
-        await fsPromises.remove(`${path}/${projectName}`);
+        await EditorUtils.removeFolder(`${path}/${projectName}`);
 
         return {
             success: true
@@ -197,6 +197,16 @@ EditorUtils.deleteEditor = (path) => {
             } else {
                 resolve();
             }
+        })
+    })
+    
+}
+
+EditorUtils.removeFolder = (path) => {
+    return new Promise(function (resolve, reject) {
+            rimraf(path, function () { 
+                resolve();
+            });
         })
     })
     
