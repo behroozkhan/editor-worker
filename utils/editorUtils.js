@@ -258,6 +258,10 @@ EditorUtils.installDependencies = async (dependencies, path) => {
             cwd: path
         });
 
+        if (!success) {
+            throw new Error(error);
+        }
+
         return {
             success,
             error
