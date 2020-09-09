@@ -263,6 +263,7 @@ EditorUtils.installDependencies = async (dependencies) => {
             error
         };
     } catch (error) {
+        console.log("installDependencies error", error)
         return {
             success: false,
             error,
