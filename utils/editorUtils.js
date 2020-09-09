@@ -10,7 +10,6 @@ const exec = Promise.promisify(require('child_process').exec);
 let ncpAsync = Promise.promisify(require('ncp').ncp);
 const fs = require('fs');
 const fsPromises = fs.promises;
-const axios = require('axios');
 
 let EditorUtils = {};
 
@@ -111,7 +110,6 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             expiresIn: '1d'
         });
 
-        let path = `${process.env.PROJECT_BASE_PATH}/${publisherId}/${websiteId}`;
         console.log("Editor started successfully");
         updateLongProcess(longProcessData, 'Editor started successfully', "complete", {
             progress: 100,
