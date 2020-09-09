@@ -5,6 +5,7 @@ require('dotenv').config();
 
 let express = require('express');
 let app = express();
+app.use(express.json());
 const appBaseRoute = '/api';
 
 app.post(appBaseRoute + '/request', async (req, res) => {
