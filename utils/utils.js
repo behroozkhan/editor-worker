@@ -1,4 +1,7 @@
 const axios = require('axios');
+const Promise = require('bluebird');
+const exec = require('child_process').exec;
+const fs = require('fs');
 
 module.exports.getRandomInt = function getRandomInt(min, max) {
     min = Math.ceil(min);
