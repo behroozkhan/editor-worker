@@ -105,3 +105,11 @@ module.exports.spawnAsync = function spawnAsync(cmd, args, options, unref) {
             ls.unref();
     });
 }
+
+module.exports.waitFOrMilis = function waitForMilis(milis) {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            resolve();
+        }, milis);
+    })
+}
