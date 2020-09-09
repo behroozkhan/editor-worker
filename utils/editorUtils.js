@@ -29,7 +29,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         let homepage = `/${publisherWebsite.publisherId}/${publisherWebsite.endWebsiteId}/build`;
 
         console.log("Copying editor files ...");
-        updateLongProcess(longProcessData, 'Copying editor files ...', "runnung", {
+        updateLongProcess(longProcessData, 'Copying editor files ...', "running", {
             progress: 10
         });
 
@@ -41,7 +41,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         await waitForMilis(500);
 
         console.log("Installing required packages ...");
-        updateLongProcess(longProcessData, 'Installing required packages ...', "runnung", {
+        updateLongProcess(longProcessData, 'Installing required packages ...', "running", {
             progress: 30
         });
 
@@ -50,7 +50,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
 
         console.log("Installing extra dependencies ...");
-        updateLongProcess(longProcessData, 'Installing extra dependencies ...', "runnung", {
+        updateLongProcess(longProcessData, 'Installing extra dependencies ...', "running", {
             progress: 50
         });
 
@@ -59,7 +59,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
 
         console.log("Starting services ...");
-        updateLongProcess(longProcessData, 'Starting services ...', "runnung", {
+        updateLongProcess(longProcessData, 'Starting services ...', "running", {
             progress: 60
         });
 
@@ -73,7 +73,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         });
 
         console.log("Copying data ...");
-        updateLongProcess(longProcessData, 'Copying data ...', "runnung", {
+        updateLongProcess(longProcessData, 'Copying data ...', "running", {
             progress: 70
         });
 
@@ -89,7 +89,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         await waitForMilis(500);
 
         console.log("Building editor ...");
-        updateLongProcess(longProcessData, 'Building editor ...', "runnung", {
+        updateLongProcess(longProcessData, 'Building editor ...', "running", {
             progress: 75
         });
 
