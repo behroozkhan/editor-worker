@@ -4,7 +4,7 @@ let {
     execShellCommand,
     waitForMilis
 } = require('./utils');
-
+let jwt = require('jsonwebtoken');
 const Promise = require('bluebird');
 const execFile = Promise.promisify(require('child_process').execFile);
 const exec = Promise.promisify(require('child_process').exec);
@@ -296,7 +296,7 @@ EditorUtils.installService = async (service, path) => {
 
 EditorUtils.buildProject = async (path) => {
     try {
-        let command = 'npm run build';
+        let command = 'yarn build';
         let {
             success,
             stdout,
