@@ -11,7 +11,7 @@ let ncpAsync = Promise.promisify(require('ncp').ncp);
 const fs = require('fs');
 const fsPromises = fs.promises;
 
-let EditorUtils;
+let EditorUtils = {};
 
 EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, addedProducts,
     longProcessData, editorVersion = 1) => {
