@@ -1,5 +1,5 @@
-let EditorUtils = require('./utils/editorUtils');
 let Response = require('./utils/response');
+const EditorUtils = require('./utils/editorUtils');
 
 require('dotenv').config();
 
