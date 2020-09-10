@@ -250,7 +250,7 @@ EditorUtils.getPermissonsFromWebsites = (websites) => {
 
 EditorUtils.installDependencies = async (dependencies, path) => {
     try {
-        let command = 'pnpm install ' + dependencies.join(' ');
+        let command = 'yarn install ' + dependencies.join(' ');
         let {
             success,
             stdout,
@@ -298,7 +298,7 @@ EditorUtils.installService = async (service, path) => {
 
 EditorUtils.buildProject = async (path) => {
     try {
-        let command = 'yarn build';
+        let command = 'yarn run build';
         let {
             success,
             stdout,
