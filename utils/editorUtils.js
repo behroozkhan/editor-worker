@@ -133,11 +133,14 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
 EditorUtils.gitClone = async (gitAddress, projectName, path) => {
     try {
         // TODO make it async in safe way
+        console.log("gitClone 1")
         if (!fs.existsSync(path)) 
         {
+            console.log("gitClone 2")
             fs.mkdirSync(path, {recursive: true});
         }
 
+        console.log("gitClone 3")
         let command = `git clone ${gitAddress}`;
         let {
             success,
@@ -147,15 +150,19 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
         } = await execShellCommand(command, {
             cwd: path
         });
+        console.log("gitClone 4", stdout, stderr)
 
         if (!success) {
             console.log(error);
             throw new Error("Failed on git clone ...");
         }
 
+        console.log("gitClone 5")
         await ncpAsync(`${path}/${projectName}`, path);
+        console.log("gitClone 6")
 
         await EditorUtils.removeFolder(`${path}/${projectName}`);
+        console.log("gitClone 7")
 
         return {
             success: true
