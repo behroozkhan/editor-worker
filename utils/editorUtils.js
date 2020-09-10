@@ -140,6 +140,11 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
             fs.mkdirSync(path, {recursive: true});
         }
 
+        if (fs.existsSync(`${path}/${projectName}`)) {
+            console.log("gitClone 2.5")
+            await EditorUtils.removeFolder(`${path}/${projectName}`);
+        }
+
         console.log("gitClone 3")
         let command = `git clone ${gitAddress}`;
         let {
