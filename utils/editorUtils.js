@@ -219,23 +219,23 @@ EditorUtils.getSourceFilePath = (publisherWebsite, editorVersion) => {
     switch (publisherWebsite.type) {
         case 'website':
             return {
-                address: 'https://github.com/behroozkhan/test-project.git',
-                name: 'test-project'
+                address: 'https://github.com/weblancerir/blank.git',
+                name: 'blank'
             };
         case 'service':
             return {
-                address: 'https://github.com/behroozkhan/test-project.git',
-                name: 'test-project'
+                address: 'https://github.com/weblancerir/blank.git',
+                name: 'blank'
             };
         case 'app':
             return {
-                address: 'https://github.com/behroozkhan/test-project.git',
-                name: 'test-project'
+                address: 'https://github.com/weblancerir/blank.git',
+                name: 'blank'
             };
         case 'component':
             return {
-                address: 'https://github.com/behroozkhan/test-project.git',
-                name: 'test-project'
+                address: 'https://github.com/weblancerir/blank.git',
+                name: 'blank'
             };
     }
 
