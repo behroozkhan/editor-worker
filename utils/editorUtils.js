@@ -42,26 +42,6 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
 
         await waitForMilis(500);
 
-        console.log("Installing required packages ...");
-        updateLongProcess(longProcessData, 'Installing required packages ...', "running", {
-            progress: 30
-        });
-
-        // let packageResult = await EditorUtils.installDependencies([], path);
-        // if (!packageResult.success)
-        //     throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
-
-        console.log("Installing extra dependencies ...");
-        updateLongProcess(longProcessData, 'Installing extra dependencies ...', "running", {
-            progress: 50
-        });
-
-        if (dependencies.length > 0) {
-            let dependenciesResult = await EditorUtils.installDependencies(dependencies, path);
-            if (!dependenciesResult.success)
-                throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
-        }
-
         console.log("Starting services ...");
         updateLongProcess(longProcessData, 'Starting services ...', "running", {
             progress: 60
@@ -91,14 +71,32 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
 
         await waitForMilis(500);
 
-        console.log("Building editor ...");
-        updateLongProcess(longProcessData, 'Building editor ...', "running", {
-            progress: 75
-        });
+        // console.log("Installing required packages ...");
+        // updateLongProcess(longProcessData, 'Installing required packages ...', "running", {
+        //     progress: 30
+        // });
+        // let packageResult = await EditorUtils.installDependencies([], path);
+        // if (!packageResult.success)
+        //     throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
 
-        let buildResult = await EditorUtils.buildProject(path);
-        if (!buildResult.success)
-            throw new Error(`Can't build editor: ${buildResult.message}`);
+        if (dependencies.length > 0) {
+            console.log("Installing extra dependencies ...");
+            updateLongProcess(longProcessData, 'Installing extra dependencies ...', "running", {
+                progress: 50
+            });
+
+            let dependenciesResult = await EditorUtils.installDependencies(dependencies, path);
+            if (!dependenciesResult.success)
+                throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
+                console.log("Building editor ...");
+                updateLongProcess(longProcessData, 'Building editor ...', "running", {
+                    progress: 75
+                });
+        
+            let buildResult = await EditorUtils.buildProject(path);
+            if (!buildResult.success)
+                throw new Error(`Can't build editor: ${buildResult.message}`);
+        }
 
         let userAccessToken = jwt.sign({
             id: publisherWebsite.endUserId,
