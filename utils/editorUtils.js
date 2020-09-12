@@ -162,7 +162,7 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
         }
 
         console.log("gitClone 5", path, projectName)
-        await ncpAsync(`${path}/${projectName}`, path);
+        await ncpAsync(`${path}/${projectName}`, path, {stopOnErr: true});
         console.log("gitClone 6")
 
         await EditorUtils.removeFolder(`${path}/${projectName}`);
