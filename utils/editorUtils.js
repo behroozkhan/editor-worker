@@ -116,7 +116,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             progress: 100,
             userAccessToken,
             publisherAccessToken,
-            url: `${process.env.EDITOR_DOMAIN}${homepage}`,
+            url: `${process.env.EDITOR_DOMAIN}${homepage}/index.html`,
             longProcessTimeout: 30 * 24 * 60 * 60
         });
     } catch (error) {
