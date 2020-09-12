@@ -25,7 +25,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
 
         let siteDataJsonPath = `${path}/src/data/siteData.json`;
         let servicePortsJsonPath = `${path}/src/data/servicePorts.json`;
-        let configJsonPath = `${path}/src/data/config.json`;
+        let configJsonPath = `${path}/public/static/json/config.json`;
         let packagePath = `${path}/package.json`;
 
         let homepage = `/${publisherWebsite.publisherId}/${publisherWebsite.endWebsiteId}/build`;
@@ -47,18 +47,20 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             progress: 30
         });
 
-        let packageResult = await EditorUtils.installDependencies([], path);
-        if (!packageResult.success)
-            throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
+        // let packageResult = await EditorUtils.installDependencies([], path);
+        // if (!packageResult.success)
+        //     throw new Error(`Can't install package.json for editor: ${packageResult.message}`);
 
         console.log("Installing extra dependencies ...");
         updateLongProcess(longProcessData, 'Installing extra dependencies ...', "running", {
             progress: 50
         });
 
-        let dependenciesResult = await EditorUtils.installDependencies(dependencies, path);
-        if (!dependenciesResult.success)
-            throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
+        if (dependencies.length > 0) {
+            let dependenciesResult = await EditorUtils.installDependencies(dependencies, path);
+            if (!dependenciesResult.success)
+                throw new Error(`Can't install dependencies for editor: ${dependenciesResult.message}`);
+        }
 
         console.log("Starting services ...");
         updateLongProcess(longProcessData, 'Starting services ...', "running", {
@@ -79,10 +81,9 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             progress: 70
         });
 
-        let packageData = await fsPromises.readFile(packagePath, 'utf8');
-        packageData = packageData.replace(/{homepage}/g, homepage);
-        await fsPromises.writeFile(packagePath, packageData, 'utf8');
-        // await fsPromises.writeFile(siteDataJsonPath, JSON.stringify(publisherWebsite.metadata.siteData), 'utf8');
+        // let packageData = await fsPromises.readFile(packagePath, 'utf8');
+        // packageData = packageData.replace(/{homepage}/g, homepage);
+        // await fsPromises.writeFile(packagePath, packageData, 'utf8');
         await fsPromises.writeFile(servicePortsJsonPath, JSON.stringify(servicePorts), 'utf8');
         await fsPromises.writeFile(configJsonPath, JSON.stringify({
             BaseName: homepage
