@@ -117,7 +117,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
             userAccessToken,
             publisherAccessToken,
             url: `${process.env.EDITOR_DOMAIN}${homepage}`,
-            longProcessTimeout: 24 * 60 * 60
+            longProcessTimeout: 30 * 24 * 60 * 60
         });
     } catch (error) {
         await EditorUtils.deleteEditor(path);
