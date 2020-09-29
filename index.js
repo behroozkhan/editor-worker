@@ -88,15 +88,21 @@ app.post(appBaseRoute + '/build', function (req, res) {
 })
 
 app.post(appBaseRoute + '/publish', function (req, res) {
-    let {path} = req.body;
+    let {targetUrl, publisherWebsite, username, domainConfig, longProcessData} = req.body;
+    
+    let path = `${process.env.PROJECT_BASE_PATH}/${publisherWebsite.publisherId}/${publisherWebsite.websiteId}`;
 
-    let result = EditorUtils.publishProject(path);
+    let result = EditorUtils.publishProject(path, 'build', targetUrl, publisherWebsite, username, 
+        domainConfig, longProcessData);
 
     if (result.success) {
         res.json(
             new Response(true, {urlToDownload: result.url}).json()
         );
     } else {
+        updateLongProcess(longProcessData, 'Files recieved by host ...', "failed", {
+            error: result.error
+        });
         res.status(500).json(
             new Response(false, {error: result.error}, result.error.message).json()
         );

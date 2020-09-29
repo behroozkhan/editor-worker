@@ -12,6 +12,7 @@ let ncpAsync = Promise.promisify(require('ncp').ncp);
 const fs = require('fs');
 const fsPromises = fs.promises;
 let rimraf = require("rimraf");
+var FormData = require('form-data');
 
 let EditorUtils = {};
 
@@ -24,7 +25,7 @@ EditorUtils.prepareEditor = async (path, publisherWebsite, productDetails, added
         let services = publisherWebsite.metadata.services || [];
 
         let siteDataJsonPath = `${path}/src/data/siteData.json`;
-        let servicePortsJsonPath = `${path}/src/data/servicePorts.json`;
+        let servicePortsJsonPath = `${path}/public/static/json/servicePorts.json`;
         let configJsonPath = `${path}/public/static/json/config.json`;
         let packagePath = `${path}/package.json`;
 
@@ -332,27 +333,46 @@ EditorUtils.buildProject = async (path) => {
     }
 }
 
-EditorUtils.publishProject = async (path) => {
+EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, username, 
+    domainConfig, longProcessData) => {
     try {
-        let command = 'npm run publish';
-        let {
-            status,
-            stdout,
-            stderr
-        } = await exec(command, {
+        let command = `zip -r siteZip.zip ${path}/${folder}`;
+        let result = await execShellCommand(command, {
             cwd: path
         });
 
-        if (status == 0) {
-            throw new Error('Publishing failed !!!');
+        if (!result.success) {
+            throw new Error('Failed on zipping !!!');
         }
 
-        let projectBasePath = process.env.PROJECT_BASE_PATH;
-        let path = projectBasePath.replace(projectBasePath, '');
+        let body = {
+            username,
+            websiteName: publisherWebsite.name,
+            userId: publisherWebsite.endUserId,
+            publisherId: publisherWebsite.publisherId,
+            domainConfig,
+            metadata: publisherWebsite.metadata,
+            longProcessData
+        };
+        
+        // Send zip file to targetUrl
+        let form = new FormData();
+        Object.keys(body).forEach(key => {
+            form.append([key], data[key]);
+        });
+        form.append("siteZip", fs.createReadStream(`${path}/siteZip.zip`));
+
+        let response = await axios.post(targetUrl, formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+        });
+
+        console.log("publishProject response", response);
 
         return {
             success: true,
-            url: `${path}/build`
+            publishData: response.data.data
         };
     } catch (error) {
         return {
