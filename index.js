@@ -106,7 +106,7 @@ app.post(appBaseRoute + '/publish', function (req, res) {
             error: result.error
         });
         res.status(500).json(
-            new Response(false, {error: result.error}, result.error.message).json()
+            new Response(false, {error: result.error}, result.errorge).json()
         );
     }
 })
