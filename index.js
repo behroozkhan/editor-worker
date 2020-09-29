@@ -4,6 +4,7 @@ const EditorUtils = require('./utils/editorUtils');
 require('dotenv').config();
 
 let express = require('express');
+const { updateLongProcess } = require('./utils/utils');
 let app = express();
 app.use(express.json());
 const appBaseRoute = '/api';
