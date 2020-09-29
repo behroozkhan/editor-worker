@@ -163,7 +163,7 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
         }
 
         console.log("gitClone 5", path, projectName)
-        command = `mv -v ${path}/${projectName}/* ${path}/`;
+        command = `mv ${path}/${projectName}/* ${path}/`;
         let moveResult = await execShellCommand(command);
         if (!moveResult.success) {
             console.log(moveResult.error);
