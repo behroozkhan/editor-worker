@@ -347,6 +347,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         });
 
         if (!result.success) {
+            console.log("Failed on zipping", result.error, result.stderr)
             throw new Error('Failed on zipping !!!');
         }
 
