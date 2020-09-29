@@ -113,3 +113,9 @@ module.exports.waitFOrMilis = function waitForMilis(milis) {
         }, milis);
     })
 }
+
+module.exports.concatFormData = (form) => {
+    return new Promise((resolve) => {
+        form.pipe(concat({ encoding: 'buffer' }, data => resolve({ data, headers: form.getHeaders() })));
+    });
+}
