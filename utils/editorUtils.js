@@ -364,7 +364,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         // Send zip file to targetUrl
         let form = new FormData();
         Object.keys(body).forEach(key => {
-            form.append([key], data[key]);
+            form.append([key], body[key]);
         });
         form.append("siteZip", fs.createReadStream(`${path}/siteZip.zip`));
 
