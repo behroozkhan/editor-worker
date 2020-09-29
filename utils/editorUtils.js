@@ -380,6 +380,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             publishData: response.data.data
         };
     } catch (error) {
+        console.log("Error publishProject", error)
         return {
             success: false,
             error,
