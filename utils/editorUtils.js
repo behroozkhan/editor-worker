@@ -369,7 +369,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         });
         form.append("siteZip", fs.createReadStream(`${path}/siteZip.zip`));
 
-        let response = await axios.post(targetUrl, formData, {
+        let response = await axios.post(targetUrl, form, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
