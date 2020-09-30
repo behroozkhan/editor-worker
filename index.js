@@ -99,15 +99,17 @@ app.post(appBaseRoute + '/publish', function (req, res) {
         domainConfig, longProcessData);
 
     if (result.success) {
+        console.log("Publish Success");
         res.json(
-            new Response(true, {urlToDownload: result.url}).json()
+            new Response(true, result.data).json()
         );
     } else {
+        console.log("Publish Failed", result);
         updateLongProcess(longProcessData, 'Files recieved by host ...', "failed", {
             error: result.error
         });
         res.status(500).json(
-            new Response(false, {error: result.error}, result.errorge).json()
+            new Response(false, {error: result.error}, result.error).json()
         );
     }
 })

@@ -378,7 +378,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
 
         return {
             success: true,
-            publishData: response.data.data
+            data: response.data.data
         };
     } catch (error) {
         console.log("Error publishProject", error)
