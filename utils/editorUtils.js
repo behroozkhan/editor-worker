@@ -343,7 +343,7 @@ EditorUtils.buildProject = async (path) => {
 EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, username, 
     domainConfig, longProcessData) => {
     try {
-        let command = `zip -r siteZip.zip ${path}/${folder}`;
+        let command = `zip -r siteZip.zip ${folder}/*`;
         let result = await execShellCommand(command, {
             cwd: path
         });
