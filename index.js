@@ -10,6 +10,7 @@ app.use(express.json());
 const appBaseRoute = '/api';
 
 app.post(appBaseRoute + '/request', async (req, res) => {
+    console.log("Preparing Editor 1 ...");
     let {publisherId, websiteId, publisherWebsite, 
             productDetails, addedProducts, longProcessData} 
         = req.body;
@@ -19,7 +20,7 @@ app.post(appBaseRoute + '/request', async (req, res) => {
         new Response(true, {}, "Preparing Editor ...").json()
     );
 
-    console.log("Preparing Editor ...");
+    console.log("Preparing Editor 2 ...");
     await EditorUtils.prepareEditor(
         path, publisherWebsite, productDetails, addedProducts, longProcessData,);
 })
