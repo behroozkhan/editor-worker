@@ -25,7 +25,7 @@ module.exports.updateLongProcess = function updateLongProcess({longProcessUrl, l
             'Authorization': `Bearer ${longProcessToken}`
         }
     }).then(res => {}).catch(error => {
-        console.log("update long process error: ", error);
+        // console.log("update long process error: ", error);
     });
 };
 
