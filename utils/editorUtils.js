@@ -375,6 +375,11 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         let response = await axios.post(targetUrl, data, {headers});
 
         console.log("publishProject response", response);
+        
+        command = `rm siteZip.zip`;
+        let result = await execShellCommand(command, {
+            cwd: `${path}/${folder}`
+        });
 
         return {
             success: true,
