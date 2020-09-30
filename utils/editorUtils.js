@@ -343,9 +343,9 @@ EditorUtils.buildProject = async (path) => {
 EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, username, 
     domainConfig, longProcessData) => {
     try {
-        let command = `zip -r siteZip.zip ${folder}/*`;
+        let command = `zip -r siteZip.zip *`;
         let result = await execShellCommand(command, {
-            cwd: path
+            cwd: `${path}/${folder}`
         });
 
         if (!result.success) {
@@ -368,7 +368,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         Object.keys(body).forEach(key => {
             form.append([key], JSON.stringify(body[key]));
         });
-        form.append("siteZip", fs.createReadStream(`${path}/siteZip.zip`));
+        form.append("siteZip", fs.createReadStream(`${path}/${folder}/siteZip.zip`));
 
         let {data, headers} = await concatFormData(form);
 
