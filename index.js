@@ -107,7 +107,7 @@ app.post(appBaseRoute + '/publish', async function (req, res) {
     } else {
         console.log("Publish Failed", result);
         updateLongProcess(longProcessData, 'Files recieved by host ...', "failed", {
-            error: result.error
+            // error: result.error
         });
         res.status(500).json(
             new Response(false, {error: result.error}, result.error).json()
