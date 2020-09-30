@@ -343,11 +343,13 @@ EditorUtils.buildProject = async (path) => {
 EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, username, 
     domainConfig, longProcessData) => {
     try {
+        console.log("publishProject 1");
         let command = `zip -r siteZip.zip *`;
         let result = await execShellCommand(command, {
             cwd: `${path}/${folder}`
         });
 
+        console.log("publishProject 2");
         if (!result.success) {
             console.log("Failed on zipping", result.error, result.stderr)
             throw new Error('Failed on zipping !!!');
@@ -363,6 +365,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             longProcessData
         };
         
+        console.log("publishProject 3");
         // Send zip file to targetUrl
         let form = new FormData();
         Object.keys(body).forEach(key => {
@@ -370,10 +373,13 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         });
         form.append("siteZip", fs.createReadStream(`${path}/${folder}/siteZip.zip`));
 
+        console.log("publishProject 4");
         let {data, headers} = await concatFormData(form);
 
+        console.log("publishProject 5");
         let response = await axios.post(targetUrl, data, {headers});
 
+        console.log("publishProject 6");
         console.log("publishProject response", response);
         
         command = `rm siteZip.zip`;
@@ -381,6 +387,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             cwd: `${path}/${folder}`
         });
 
+        console.log("publishProject 7");
         return {
             success: true,
             data: response.data.data
