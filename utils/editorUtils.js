@@ -15,7 +15,6 @@ const fsPromises = fs.promises;
 let rimraf = require("rimraf");
 var FormData = require('form-data');
 const axios = require('axios');
-const concat = require("concat-stream")
 
 let EditorUtils = {};
 
@@ -166,7 +165,7 @@ EditorUtils.gitClone = async (gitAddress, projectName, path) => {
         }
 
         console.log("gitClone 5", path, projectName)
-        command = `mv ${path}/${projectName}/* ${path}/`;
+        command = `cp -r ${path}/${projectName}/* ${path}/`;
         let moveResult = await execShellCommand(command);
         if (!moveResult.success) {
             console.log(moveResult.error);
