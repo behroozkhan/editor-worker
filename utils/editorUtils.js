@@ -377,7 +377,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         console.log("publishProject response", response);
         
         command = `rm siteZip.zip`;
-        let result = await execShellCommand(command, {
+        result = await execShellCommand(command, {
             cwd: `${path}/${folder}`
         });
 
