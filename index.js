@@ -95,7 +95,7 @@ app.post(appBaseRoute + '/publish', function (req, res) {
     let path = `${process.env.PROJECT_BASE_PATH}/${publisherWebsite.publisherId}/${
         publisherWebsite.endWebsiteId}`;
 
-    let result = EditorUtils.publishProject(path, 'build', targetUrl, publisherWebsite, username, 
+    let result = await EditorUtils.publishProject(path, 'build', targetUrl, publisherWebsite, username, 
         domainConfig, longProcessData);
 
     if (result.success) {
