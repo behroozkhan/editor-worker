@@ -88,7 +88,7 @@ app.post(appBaseRoute + '/build', function (req, res) {
     }
 })
 
-app.post(appBaseRoute + '/publish', function (req, res) {
+app.post(appBaseRoute + '/publish', async function (req, res) {
     let {targetUrl, publisherWebsite, username, domainConfig, longProcessData} = req.body;
     console.log("publish", targetUrl, username, domainConfig);
     
