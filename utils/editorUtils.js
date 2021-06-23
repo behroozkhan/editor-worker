@@ -371,7 +371,26 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         Object.keys(body).forEach(key => {
             form.append([key], JSON.stringify(body[key]));
         });
-        form.append("siteZip", fs.createReadStream(`${path}/${folder}/siteZip.zip`));
+
+        let destination;
+        const source = fs.createReadStream(`${path}/${folder}/siteZip.zip`);
+        destination.on('close', () => {
+            source.destroy();
+        });
+         
+        destination.on('error', () => {
+            source.destroy();
+        });
+         
+        source.on('error', () => {
+            destination.destroy();
+        });
+         
+        source.on('end', () => {
+            destination.destroy();
+        });
+
+        form.append("siteZip", source);
 
         console.log("publishProject 4");
         let {data, headers} = await concatFormData(form);
