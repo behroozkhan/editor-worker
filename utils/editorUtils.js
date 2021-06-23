@@ -377,7 +377,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         let {data, headers} = await concatFormData(form);
 
         console.log("publishProject 5");
-        let response = await axios.post(targetUrl, data, {headers});
+        let response = await axios.post(targetUrl, data, {headers, maxRedirects: 0});
 
         console.log("publishProject 6");
         console.log("publishProject response", response);
