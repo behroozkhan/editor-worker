@@ -372,24 +372,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             form.append([key], JSON.stringify(body[key]));
         });
 
-        let destination;
         const source = fs.createReadStream(`${path}/${folder}/siteZip.zip`);
-        source.pipe(destination);
-        destination.on('close', () => {
-            source.destroy();
-        });
-         
-        destination.on('error', () => {
-            source.destroy();
-        });
-         
-        source.on('error', () => {
-            destination.destroy();
-        });
-         
-        source.on('end', () => {
-            destination.destroy();
-        });
 
         form.append("siteZip", source);
 
@@ -398,6 +381,8 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
 
         console.log("publishProject 5");
         let response = await axios.post(targetUrl, data, {headers, maxRedirects: 0});
+
+        source.destroy();
 
         console.log("publishProject 6");
         console.log("publishProject response", response);
