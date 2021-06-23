@@ -396,6 +396,8 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             headers: headers
         });
 
+        response = response.json();
+
         source.destroy();
 
         console.log("publishProject 6");
