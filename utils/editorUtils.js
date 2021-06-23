@@ -13,7 +13,7 @@ let ncpAsync = Promise.promisify(require('ncp').ncp);
 const fs = require('fs');
 const fsPromises = fs.promises;
 let rimraf = require("rimraf");
-var FormData = require('form-data');
+const FormData = require('form-data');
 const axios = require('axios');
 
 let EditorUtils = {};
