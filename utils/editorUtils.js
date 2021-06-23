@@ -397,7 +397,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             headers: headers
         });
 
-        response = response.json();
+        response = await response.json();
 
         source.destroy();
 
