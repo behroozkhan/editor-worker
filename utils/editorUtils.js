@@ -405,7 +405,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
             cwd: `${path}/${folder}`
         });
 
-        console.log("publishProject 7");
+        console.log("publishProject 7", response);
         return {
             success: true,
             data: response.data.data
