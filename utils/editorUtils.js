@@ -374,6 +374,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
 
         let destination;
         const source = fs.createReadStream(`${path}/${folder}/siteZip.zip`);
+        source.pipe(destination);
         destination.on('close', () => {
             source.destroy();
         });
