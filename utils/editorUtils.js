@@ -381,6 +381,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
         console.log("publishProject 4");
         let {data, headers} = await concatFormData(form);
 
+        console.log("publishProject 4.5 headers", headers);
         // console.log("publishProject 5");
         // const axiosInstance = axios.create({
         //     baseURL: targetUrl,
