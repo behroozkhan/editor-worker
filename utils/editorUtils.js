@@ -15,6 +15,8 @@ const fsPromises = fs.promises;
 let rimraf = require("rimraf");
 const FormData = require('form-data');
 const axios = require('axios');
+const fetch = require('node-fetch');
+fetch.Promise = Promise;
 
 let EditorUtils = {};
 
