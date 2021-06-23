@@ -392,7 +392,7 @@ EditorUtils.publishProject = async (path, folder, targetUrl, publisherWebsite, u
 
         let response = await fetch(targetUrl, {
             method: 'post',
-            body: formData
+            body: form
         });
 
         source.destroy();
