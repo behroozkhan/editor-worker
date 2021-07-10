@@ -6,7 +6,7 @@ require('dotenv').config();
 let express = require('express');
 const { updateLongProcess } = require('./utils/utils');
 let app = express();
-app.use(express.json());
+app.use(express.json({ limit: "50mb" }));
 const appBaseRoute = '/api';
 
 app.post(appBaseRoute + '/request', async (req, res) => {
